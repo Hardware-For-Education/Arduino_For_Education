@@ -81,49 +81,52 @@ int main()
 
         /*................................ Caso ESPERANDO ...............................*/
         case ESPERANDO:
-            if (firmata() == "POTENCIOMETRO")
+        firmata_mensaje = firmata();
+            if (firmata_mensaje == "POTENCIOMETRO")
             {
                 state = POTENCIOMETRO;
             } // IF POTENCIOMETRO
             else
             {
-                if (firmata() == "JOYSTICK_X")
+                if (firmata_mensaje == "JOYSTICK_X")
                 {
+                    // EMPEZAR LECTURA ADC 
+                    ///-------------
                     state = JOYSTICK_X;
                 } // IF JOYSTICK_X
                 else
                 {
-                    if (firmata() == "JOYSTICK_Y")
+                    if (firmata_mensaje == "JOYSTICK_Y")
                     {
                         state = JOYSTICK_Y;
                     } // IF JOYSTICK_Y
                     else
                     {
-                        if (firmata() == "JOYSTICK_Z")
+                        if (firmata_mensaje == "JOYSTICK_Z")
                         {
                             state = JOYSTICK_Z;
                         } // IF JOYSTICK_Z
                         else
                         {
-                            if (firmata() == "PULSADOR")
+                            if (firmata_mensaje == "PULSADOR")
                             {
                                 state = PULSADOR;
                             } // IF PULSADOR
                             else
                             {
-                                if (firmata() == "MOTOR_BUZZER")
+                                if (firmata_mensaje == "MOTOR_BUZZER")
                                 {
                                     state = MOTOR_BUZZER;
                                 } // IF MOTOR_BUZZER
                                 else
                                 {
-                                    if (firmata() == "MICROFONO")
+                                    if (firmata_mensaje == "MICROFONO")
                                     {
                                         state = MICROFONO;
                                     } // IF MICROFONO
                                     else
                                     {
-                                        if (firmata() == "LED_RGB")
+                                        if (firmata_mensaje == "LED_RGB")
                                         {
                                             state = LED_RGB;
                                         } // IF LED_RGB
@@ -181,6 +184,7 @@ int main()
 
         /*................................ Caso JOYSTICK_Z ...............................*/
         case JOYSTICK_Z:
+        //DIGITAL
             if (listo_ADC(JOYSTICK_Z))
             {
                 enviar_firmata(JOYSTICK_Z, leer_ADC(JOYSTICK_Z));
