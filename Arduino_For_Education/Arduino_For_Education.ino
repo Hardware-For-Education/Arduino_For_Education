@@ -105,10 +105,13 @@ void Firmata_config() {
 
   Firmata.attach(SET_PIN_MODE, setPinModeCallback);
   Firmata.attach(DIGITAL_MESSAGE, digitalWriteCallback);
+  Firmata.attach(ANALOG_MESSAGE, analogWriteCallback);
   Firmata.attach(START_SYSEX, sysexCallback);
 
   Firmata.attach(REPORT_ANALOG, reportAnalogCallback);
   Firmata.attach(REPORT_DIGITAL, reportDigitalCallback);
+
+  Firmata.attach(SYSTEM_RESET, systemResetCallback);
 
   Firmata.begin(115200);
 
