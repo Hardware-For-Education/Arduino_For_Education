@@ -5,6 +5,8 @@
 /* 0x00-0x0F reserved for user-defined commands */
 static const int RU_THERE =   0x51;
 static const int I_AM_HERE =  0x52;
+static const int LED_RGB =  0x55;
+
 #define ARDUINO_INSTANCE_ID 1
 
 // the minimum interval for sampling analog input
@@ -281,6 +283,21 @@ void reportDigitalCallback(byte port, int value) {
 */
 void sysexCallback(byte command, byte argc, byte *argv) {
   switch (command) {
+    case LED_RGB:
+      if (argc == 3){
+        digitalWrite(2,int(argv[0]));
+        digitalWrite(3,int(argv[1]));
+        digitalWrite(4,int(argv[2]));
+      }else{
+        if(argc == 0){
+          pinMode(2,OUTPUT);
+          pinMode(3,OUTPUT);
+          pinMode(4,OUTPUT);
+        }else{
+         //Firmata.sendString("Not enough data"); 
+        }
+      }
+      break;
     case RU_THERE:
       Firmata.write(START_SYSEX);
       Firmata.write((byte) I_AM_HERE);
