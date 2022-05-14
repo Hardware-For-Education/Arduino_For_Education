@@ -7,7 +7,7 @@
 * Ing. MsC. Martha Cano Morales
 * Ing. MsC. PhD. Jairo Alberto Hurtado
 
-<img src="https://github.com/Hardware-For-Education/.github/blob/main/profile/images/scratch4education-small.png" width="200" />
+<img src="https://github.com/Hardware-For-Education/.github-private/blob/main/profile/images/scratch4education-small.png" width="200" />
 
 ## 🙋‍♀️ Descripción 🙋‍♀️
 Proyecto enfocado en el desarrollo de una plataforma hardware que interactúe con el entorno de programación visual Scratch® a través de sensores y elementos de salida, con fines educativos tecnológicos. 
