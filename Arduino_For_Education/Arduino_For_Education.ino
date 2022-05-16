@@ -1,13 +1,19 @@
 /* LIBRERIAS */
 #include <Firmata.h>
-
-// extended command set using sysex (0-127/0x00-0x7F)
-/* 0x00-0x0F reserved for user-defined commands */
+//#include "LCD.h"
+/* 
+ *  Comandos para identificacion en los mensajes SYSEX de Firmata para Hardware Para Educacion 
+ *  Deben ser iguales a los contenidos en el archivo private_constants.py en el proyecto Python_For_Education
+ */
 static const int RU_THERE =   0x51;
 static const int I_AM_HERE =  0x52;
 static const int LED_RGB =  0x55;
 static const int LCD =  0x56;
-
+static const int CLEAR_LCD = 0x57;
+static const int ACC = 0x58;
+/*
+ * Identificador de la instancia de Arduino
+ */
 #define ARDUINO_INSTANCE_ID 1
 
 // the minimum interval for sampling analog input
@@ -286,6 +292,9 @@ void sysexCallback(byte command, byte argc, byte *argv) {
   switch (command) {
     case LCD:
      
+      break;
+    case CLEAR_LCD:
+    
       break;
     case LED_RGB:
       if (argc == 3){
