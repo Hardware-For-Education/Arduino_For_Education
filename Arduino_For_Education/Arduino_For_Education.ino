@@ -6,6 +6,7 @@
 static const int RU_THERE =   0x51;
 static const int I_AM_HERE =  0x52;
 static const int LED_RGB =  0x55;
+static const int LCD =  0x56;
 
 #define ARDUINO_INSTANCE_ID 1
 
@@ -283,6 +284,9 @@ void reportDigitalCallback(byte port, int value) {
 */
 void sysexCallback(byte command, byte argc, byte *argv) {
   switch (command) {
+    case LCD:
+     
+      break;
     case LED_RGB:
       if (argc == 3){
         digitalWrite(2,int(argv[0]));
