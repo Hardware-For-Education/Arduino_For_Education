@@ -1,6 +1,6 @@
 /* LIBRERIAS */
 #include <Firmata.h>
-//#include "LCD.h"
+#include "LCD.h"
 /* 
  *  Comandos para identificacion en los mensajes SYSEX de Firmata para Hardware Para Educacion 
  *  Deben ser iguales a los contenidos en el archivo private_constants.py en el proyecto Python_For_Education

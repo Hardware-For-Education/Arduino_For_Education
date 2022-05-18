@@ -10,6 +10,24 @@ const int LCD_HIGH = HIGH;
 const int LCD_X = 84;
 const int LCD_Y = 48;
 
+// Enviar byte a la pantalla
+void LcdWrite(byte dc, byte data)
+{
+  digitalWrite(PIN_DC, dc);
+  digitalWrite(PIN_SCE, LOW);
+  shiftOut(PIN_SDIN, PIN_SCLK, MSBFIRST, data);
+  digitalWrite(PIN_SCE, HIGH);
+}
+
+// Mostrar caracter por pantalla
+void LcdCharacter(char character)
+{
+  for (int index = 0; index < 5; index++)
+  {
+    LcdWrite(LCD_HIGH, ASCII[character - 0x20][index]);
+  }
+  LcdWrite(LCD_HIGH, 0x00);
+}
 
 // Inicializar el LCD
 void LcdInitialise(void)
@@ -27,15 +45,6 @@ void LcdInitialise(void)
 
   LcdWrite(LCD_LOW, 0x20);  // LCD basic commands
   LcdWrite(LCD_LOW, 0x0C);  // LCD normal mode
-}
-
-// Enviar byte a la pantalla
-void LcdWrite(byte dc, byte data)
-{
-  digitalWrite(PIN_DC, dc);
-  digitalWrite(PIN_SCE, LOW);
-  shiftOut(PIN_SDIN, PIN_SCLK, MSBFIRST, data);
-  digitalWrite(PIN_SCE, HIGH);
 }
 
 // Posicionar cursor en x,y
@@ -61,16 +70,6 @@ void LcdString(char const *characters)
   {
     LcdCharacter(*characters++);
   }
-}
-
-// Mostrar caracter por pantalla
-void LcdCharacter(char character)
-{
-  for (int index = 0; index < 5; index++)
-  {
-    LcdWrite(LCD_HIGH, ASCII[character - 0x20][index]);
-  }
-  LcdWrite(LCD_HIGH, 0x00);
 }
 
 // Dibujar caja (dos lineas horizontales y dos verticales)
