@@ -8,8 +8,7 @@
 static const int RU_THERE =   0x51;
 static const int I_AM_HERE =  0x52;
 static const int LED_RGB =  0x55;
-//static const int LCD =  0x57;
-static const int CLEAR_LCD = 0x57;
+static const int LCD =  0x57;
 static const int ACC = 0x58;
 /*
  * Identificador de la instancia de Arduino
@@ -293,7 +292,7 @@ void reportDigitalCallback(byte port, int value) {
 */
 void sysexCallback(byte command, byte argc, byte *argv) {
   switch (command) {
-    case CLEAR_LCD:
+    case LCD:
       if(argc == 0){
         LcdClear();
       }else{
