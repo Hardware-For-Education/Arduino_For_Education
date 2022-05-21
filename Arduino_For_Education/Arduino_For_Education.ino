@@ -8,7 +8,7 @@
 static const int RU_THERE =   0x51;
 static const int I_AM_HERE =  0x52;
 static const int LED_RGB =  0x55;
-static const int LCD =  0x56;
+//static const int LCD =  0x57;
 static const int CLEAR_LCD = 0x57;
 static const int ACC = 0x58;
 /*
@@ -129,6 +129,9 @@ void Firmata_config() {
   }
 
   systemResetCallback();
+
+  LcdInitialise();
+  LcdClear();
 }
 /*
    setPinModeCallback
@@ -290,11 +293,16 @@ void reportDigitalCallback(byte port, int value) {
 */
 void sysexCallback(byte command, byte argc, byte *argv) {
   switch (command) {
-    case LCD:
-     
-      break;
     case CLEAR_LCD:
-    
+      if(argc == 0){
+        LcdClear();
+      }else{
+        char string_to_write[14] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
+        for(int i = 1; i < argc; i++){
+          string_to_write[i-1] = argv[i];
+        }
+        write_line(string_to_write, argv[0]);
+      }
       break;
     case LED_RGB:
       if (argc == 3){
