@@ -1,18 +1,21 @@
 /* LIBRERIAS */
 #include <Firmata.h>
 #include "LCD.h"
-/* 
- *  Comandos para identificacion en los mensajes SYSEX de Firmata para Hardware Para Educacion 
- *  Deben ser iguales a los contenidos en el archivo private_constants.py en el proyecto Python_For_Education
- */
+/*
+    Comandos para identificacion en los mensajes SYSEX de Firmata para Hardware Para Educacion
+    Deben ser iguales a los contenidos en el archivo private_constants.py en el proyecto Python_For_Education
+*/
 static const int RU_THERE =   0x51;
 static const int I_AM_HERE =  0x52;
 static const int LED_RGB =  0x55;
 static const int LCD =  0x57;
-static const int ACC = 0x58;
+static const int RECTANGLE_LCD =  0x58;
+static const int TRIANGLE_LCD =  0x59;
+static const int CIRCLE_LCD =  0x60;
+static const int ACC = 0x61;
 /*
- * Identificador de la instancia de Arduino
- */
+   Identificador de la instancia de Arduino
+*/
 #define ARDUINO_INSTANCE_ID 1
 
 // the minimum interval for sampling analog input
@@ -131,6 +134,7 @@ void Firmata_config() {
 
   LcdInitialise();
   LcdClear();
+
 }
 /*
    setPinModeCallback
@@ -293,28 +297,55 @@ void reportDigitalCallback(byte port, int value) {
 void sysexCallback(byte command, byte argc, byte *argv) {
   switch (command) {
     case LCD:
-      if(argc == 0){
+      if (argc == 0) {
         LcdClear();
-      }else{
-        char string_to_write[14] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
-        for(int i = 1; i < argc; i++){
-          string_to_write[i-1] = argv[i];
+      } else {
+        char string_to_write[14] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+        for (int i = 1; i < argc; i++) {
+          string_to_write[i - 1] = argv[i];
         }
         write_line(string_to_write, argv[0]);
       }
       break;
-    case LED_RGB:
-      if (argc == 3){
-        digitalWrite(2,int(argv[0]));
-        digitalWrite(3,int(argv[1]));
-        digitalWrite(4,int(argv[2]));
+    case RECTANGLE_LCD:
+      if (argc == 0) {
+        LcdClear();
+        rectangle(8, 4, 4, 8);
       }else{
-        if(argc == 0){
-          pinMode(2,OUTPUT);
-          pinMode(3,OUTPUT);
-          pinMode(4,OUTPUT);
-        }else{
-         //Firmata.sendString("Not enough data"); 
+        LcdClear();
+        rectangle(int(argv[0]), int(argv[1]), int(argv[0])+4, int(argv[0])+8);
+      }
+      break;
+    case TRIANGLE_LCD:
+      if (argc == 0) {
+        LcdClear();
+        triangle(3, 3, 1);
+      }else{
+        LcdClear();
+        triangle(int(argv[0]), int(argv[1]), 1);
+      }
+      break;
+    case CIRCLE_LCD:
+      if (argc == 0) {
+        LcdClear();
+        circle(1, 1, 20, 20);
+      }else{
+        LcdClear();
+        circle(int(argv[0]), int(argv[1]), 20, 20);
+      }
+      break;
+    case LED_RGB:
+      if (argc == 3) {
+        digitalWrite(2, int(argv[0]));
+        digitalWrite(3, int(argv[1]));
+        digitalWrite(4, int(argv[2]));
+      } else {
+        if (argc == 0) {
+          pinMode(2, OUTPUT);
+          pinMode(3, OUTPUT);
+          pinMode(4, OUTPUT);
+        } else {
+          //Firmata.sendString("Not enough data");
         }
       }
       break;
@@ -424,37 +455,37 @@ void checkDigitalInputs(void) {
 }
 
 /*
- * 
- */
- void systemResetCallback() {
-    isResetting = true;
 
-    // initialize a defalt state
-    // TODO: option to load config from EEPROM instead of default
+*/
+void systemResetCallback() {
+  isResetting = true;
+
+  // initialize a defalt state
+  // TODO: option to load config from EEPROM instead of default
 
 #ifdef FIRMATA_SERIAL_FEATURE
-    serialFeature.reset();
+  serialFeature.reset();
 #endif
 
-    for (byte i = 0; i < TOTAL_PORTS; i++) {
-        reportPINs[i] = false;    // by default, reporting off
-        portConfigInputs[i] = 0;  // until activated
-        previousPINs[i] = 0;
-    }
+  for (byte i = 0; i < TOTAL_PORTS; i++) {
+    reportPINs[i] = false;    // by default, reporting off
+    portConfigInputs[i] = 0;  // until activated
+    previousPINs[i] = 0;
+  }
 
-    for (byte i = 0; i < TOTAL_PINS; i++) {
-        // pins with analog capability default to analog input
-        // otherwise, pins default to digital output
-        if (IS_PIN_ANALOG(i)) {
-            // turns off pullup, configures everything
-            setPinModeCallback(i, PIN_MODE_ANALOG);
-        }
-        else {
-            // sets the output to 0, configures portConfigInputs
-            setPinModeCallback(i, OUTPUT);
-        }
+  for (byte i = 0; i < TOTAL_PINS; i++) {
+    // pins with analog capability default to analog input
+    // otherwise, pins default to digital output
+    if (IS_PIN_ANALOG(i)) {
+      // turns off pullup, configures everything
+      setPinModeCallback(i, PIN_MODE_ANALOG);
     }
-    // by default, do not report any analog inputs
-    analogInputsToReport = 0;
-    isResetting = false;
+    else {
+      // sets the output to 0, configures portConfigInputs
+      setPinModeCallback(i, OUTPUT);
+    }
+  }
+  // by default, do not report any analog inputs
+  analogInputsToReport = 0;
+  isResetting = false;
 }

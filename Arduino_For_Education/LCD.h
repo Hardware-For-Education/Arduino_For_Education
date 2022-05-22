@@ -226,18 +226,3 @@ void write_line(char const *characters, int y)
   gotoXY(0, y);
   LcdString(characters);
 }
-
-//void setup()
-//{
-//   LcdInitialise();
-//   LcdClear();
-//   circle(1,1,20,20);
-//   triangle(3,3,1);
-//   rectangle(8,4,4,8);
-//
-//}
-//
-//void loop()
-//{
-//
-//}
