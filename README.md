@@ -18,6 +18,13 @@ Proyecto desarrollado en el marco del trabajo de grado como un requisito para op
 
 ### 💻 Estructura del repositorio 💻
 
+En este repositorio se encuentran los archivos requeridos para la ejecución del programa en el Arduino UNO. Se estructura a través de una carpeta _Arduino_For_Education_. En esta carpeta se encuentran tres archivos que son los requeridos para el funcionamiento desde el lado del hardware del sistema propuesto. 
+
+* Arduino_For_Education.ino: Es el archivo principal, donde se encuentran distintas funciones y las definiciones de _setup_ y _loop_
+* ASCII.h: Es el archivo donde se encuentran las definiciones de cada uno de los caracteres que se pueden imprimir en la pantalla LCD.
+* LCD.h: Es el archivo donde se encuentran las definiciones de las distintas funciones para el manejo de la pantalla LCD. 
+
+También dentro de este repositorio se encuentra una carpeta denominada _notes_ donde se pueden encontrar archivos correspondientes a la explicación de ejecución de este programa. 
 
 *Proyecto basado en el desarrollo realizado por [Alan Yoriks](https://github.com/MrYsLabv) en la serie de publicaciones realizadas en su blog [Bots in pieces](https://mryslab.github.io/bots-in-pieces/) bajo el nombre de [Creating a Scratch3 Extension For GPIO Control](https://mryslab.github.io/bots-in-pieces/posts/) en varias partes.*
 
@@ -26,5 +33,3 @@ Proyecto desarrollado en el marco del trabajo de grado como un requisito para op
   * *[Creating a Scratch3 Extension For GPIO Control - Part 3](https://mryslab.github.io/bots-in-pieces/scratch3/gpio/2019/10/03/scratch3-3.html)*
   * *[Creating a Scratch3 Extension For GPIO Control - Part 4](https://mryslab.github.io/bots-in-pieces/scratch3/gpio/2019/10/17/scratch-3-4.html)*
   * *[Scratch 3 Extensions - Part 5 ](https://mryslab.github.io/bots-in-pieces/scratch3/picoboard/circuit-playground-express/2020/02/02/scratch3-5.html)*
-
-#### 📚 Información relevante 📚
