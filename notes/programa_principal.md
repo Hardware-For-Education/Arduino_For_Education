@@ -5,7 +5,7 @@
 * [María José Niño Rodríguez](https://github.com/mjninor99)
 
 * [Juan Diego Sierra Cifuentes](https://github.com/juandisierra10)
-* [prueba](https://github.com/juandisierra10)
+* [Thomas Morales Varón](https://github.com/Thom037)
 
 
 
