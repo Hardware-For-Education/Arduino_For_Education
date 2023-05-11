@@ -7,6 +7,10 @@
 * [Thomas Morales Varón](https://github.com/Thom037)
 * [Juan Diego Sierra Cifuentes](https://github.com/juandisierra10)
 
+* [Sergio Enrique González Martínez](https://github.com/SE-GONZALEZ)
+* [Juan José Pinilla Varon](https://github.com/JuanPinilla13)
+* [Mateo Felipe Ariza Ordoñez](https://github.com/mateoariza)
+
 
 #### 👨‍🏫👩‍🏫 Bajo la dirección de 👨‍🏫👩‍🏫 
 * Ing. MsC. Martha Cano Morales
